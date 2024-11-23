@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <x-primary-link route="{{ route('bookmarks.edit', $bookmark) }}">Edit bookmark</x-primary-link>
+                    <x-primary-link route="{{ route('bookmarks.index') }}">All bookmarks</x-primary-link>
 
                     <div class="mt-12">
 
