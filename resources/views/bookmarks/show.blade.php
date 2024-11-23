@@ -14,20 +14,28 @@
 
                     <div class="mt-12">
 
-                        <div>
-                            <img src="{{ $bookmark->image ? asset('storage/' . $bookmark->image) : asset('images/default.jpg') }}"
-                            alt="{{ $bookmark->title }}"
-                            class="relative inline-block h-20 w-20 !rounded-md object-cover object-center" />
+                        <div class="grid grid-cols-2 items-center">
 
+                            <img src="{{ $bookmark->image ? asset('storage/' . $bookmark->image) : asset('images/default.jpg') }}"
+                                alt="{{ $bookmark->title }}"
+                                class="relative inline-block h-20 w-20 !rounded-md object-cover object-center" />
+
+                            <ul>
+                                <li class="flex items-center gap-x-2">
+                                    <div class="h-2 w-2 bg-black"></div>
+                                    <span class="text-lg font-bold">{{ $bookmark->name }}</span>
+                                </li>
+                                <li class="flex items-center gap-x-2">
+                                    <div class="h-2 w-2 bg-blue-700"></div>
+                                    <a class="text-blue-500 hover:text-blue-700  hover:font-semibold hover:underline transition-all duration-300 ease-in-out"
+                                        href="{{ $bookmark->url }}" target="_blank">
+                                        {{ Str::limit($bookmark->url, 30) }}
+                                    </a>
+
+                                </li>
+                            </ul>
                         </div>
-                        <ul>
-                            <li>
-                               {{ $bookmark->name }}
-                            </li>
-                            <li>
-                                <a href="{{ $bookmark->url }}" target="_blank">{{ $bookmark->url }}</a>
-                            </li>
-                        </ul>
+
 
                     </div>
 
