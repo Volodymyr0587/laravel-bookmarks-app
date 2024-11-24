@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ auth()->user()->name }}'s {{ __('Bookmarks') }}
+            @if(request()->has('search'))
+                {{ __('Search results for') }} <span class="italic underline underline-offset-8 decoration-4 decoration-blue-500">{{ request()->query('search') }}</span>
+            @else
+                {{ auth()->user()->name }}'s {{ __('Bookmarks') }}
+            @endif
         </h2>
     </x-slot>
 
@@ -50,6 +54,9 @@
                             </div>
                         @endforeach
                     </div>
+                </div>
+                <div class="mx-6 mb-6">
+                    {{ $bookmarks->links() }}
                 </div>
             </div>
         </div>
