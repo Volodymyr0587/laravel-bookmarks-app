@@ -10,7 +10,29 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <x-primary-link route="{{ route('bookmarks.create') }}">Add bookmark</x-primary-link>
+                    <div class="flex items-center justify-between">
+                        <x-primary-link route="{{ route('bookmarks.create') }}">Add bookmark</x-primary-link>
+
+                        {{-- Search Form--}}
+                        <form action="{{ route('bookmarks.index') }}" class="w-full max-w-xs">
+                            @csrf
+                            <div class="relative h-10 w-full">
+                                <button type="submit"
+                                    class="absolute grid w-5 h-5 top-2/4 right-3 -translate-y-2/4 place-items-center text-blue-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <input name="search" value="{{ request('search') }}"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                                    placeholder="Search by name or url..." />
+                            </div>
+                        </form>
+                    </div>
+                    {{-- End Search Form --}}
 
                     <div class="mt-12">
                         @foreach ($bookmarks as $bookmark)

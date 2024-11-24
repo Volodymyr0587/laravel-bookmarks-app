@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookmarkRequest;
 use App\Http\Requests\UpdateBookmarkRequest;
 
@@ -12,9 +13,18 @@ class BookmarkController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bookmarks = auth()->user()->bookmarks()->get();
+        // Get the search query from the request
+        $searchTerm = $request->query('search');
+
+        $query = auth()->user()->bookmarks();
+
+         // Use scope from model
+        $query->searchBookmarkByNameOrUrl($searchTerm);
+
+        $bookmarks = $query->paginate(5)->withQueryString();
+
         return view('bookmarks.index', compact('bookmarks'));
     }
 

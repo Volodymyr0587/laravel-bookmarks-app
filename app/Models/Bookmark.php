@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 class Bookmark extends Model
 {
@@ -25,6 +26,23 @@ class Bookmark extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeSearchBookmarkByNameOrUrl(Builder $query, $searchTerm)
+    {
+        if ($searchTerm) {
+            return $query->where(function ($q) use ($searchTerm) {
+                $q->whereAny(
+                    [
+                        'name', 'url',
+                    ],
+                    'LIKE',
+                    '%' . $searchTerm . '%'
+                );
+            });
+        }
+
+        return $query;
     }
 
 
