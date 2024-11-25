@@ -55,9 +55,11 @@
                         @endforeach
                     </div>
                 </div>
+                {{-- PAGINATION --}}
                 <div class="mx-6 mb-6">
-                    {{ $bookmarks->links() }}
+                    <x-pagination :resource=$bookmarks />
                 </div>
+                {{-- END PAGINATION --}}
             </div>
         </div>
     </div>
