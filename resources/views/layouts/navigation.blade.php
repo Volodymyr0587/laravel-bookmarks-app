@@ -76,6 +76,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link class="relative" :href="route('bookmarks.index')" :active="request()->routeIs('bookmarks.index')">
+                {{ __('Bookmarks') }}
+                <span class="absolute top-5 start-20 inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2 bg-slate-500 text-white">
+                    {{ $bookmarks_count }}
+                </span>
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
